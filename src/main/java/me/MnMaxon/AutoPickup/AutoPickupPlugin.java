@@ -1,6 +1,8 @@
 package me.MnMaxon.AutoPickup;
 
 import haveric.stackableItems.util.InventoryUtil;
+import io.puharesource.mc.titlemanager.api.TitleObject;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -151,6 +153,11 @@ public final class AutoPickupPlugin extends JavaPlugin {
         allowBlockGui = MainConfig.getBoolean("Allow BlockGui Permission");
     }
 
+    
+    static void sendFloatingText(Player p, String title, String subtitle) {
+    	new TitleObject(title, subtitle).send(p);
+    }
+    
     public static ItemStack easyItem(String name, Material material, int amount, int durability, String... lore) {
         ItemStack is = new ItemStack(material);
         if (durability > 0) is.setDurability((short) durability);
@@ -394,7 +401,9 @@ public final class AutoPickupPlugin extends JavaPlugin {
 
     public static void warn(Player p) {
         if (warnOnFull && p != null && p.isValid() && (!warnCooldown.containsKey(p.getName()) || warnCooldown.get(p.getName()) < Calendar.getInstance().getTimeInMillis())) {
-            p.sendMessage(Message.ERROR0FULL_INVENTORY + "");
+        	// Classic message
+            //p.sendMessage(Message.ERROR0FULL_INVENTORY + "");
+        	sendFloatingText(p, Message.ERROR0FULL_INVENTORY.toString(), Message.ERROR0FULL_INVENTORY_SUB.toString());
             warnCooldown.put(p.getName(), 5000 + Calendar.getInstance().getTimeInMillis());
         }
     }

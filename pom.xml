@@ -8,6 +8,11 @@
     <artifactId>AutoPickup</artifactId>
     <version>1.0</version>
     <repositories>
+	    <!-- Titlemanager -->
+        <repository>
+            <id>puha-repo</id>
+            <url>http://repo.puha.io/nexus/content/repositories/releases/</url>
+        </repository>
         <repository>
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/groups/public/</url>
@@ -15,6 +20,12 @@
     </repositories>
 
     <dependencies>
+	    <!-- Titlemanager -->
+	    <dependency>
+            <groupId>io.puharesource.mc</groupId>
+            <artifactId>TitleManager</artifactId>
+            <version>1.5.11</version>
+        </dependency>
         <!--Bukkit API-->
         <dependency>
             <groupId>org.bukkit</groupId>

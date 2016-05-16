@@ -12,8 +12,9 @@ public enum Message {
     SUCCESS0TOGGLE0SMELT_OFF("&aAutoSmelt &cDISABLED&a!"), SUCCESS0TOGGLE0SMELT_ON("&aAutoSmelt ENABLED!"),
     SUCCESS0BLOCKED_INVENTORY("&aYour inventory has been auto blocked!"), ERROR0BLOCKED_INVENTORY("&cNothing in your inventory could be auto blocked!"),
     SUCCESS0SMELTED_INVENTORY("&aYour inventory has been auto smelted!"), ERROR0SMELTED_INVENTORY("&cNothing in your inventory could be auto smelted!"),
-    ERROR0FULL_INVENTORY(ChatColor.YELLOW + "Your inventory is full!"), ERROR0BLACKLISTED0WORLD("&cYou are not allowed to do that in this world!"),
-    SUCCESS0TOGGLE0AUTOSELL_ON("&aAutoSell ENABLED!"), SUCCESS0TOGGLE0AUTOSELL_OFF("&aAutoSell &cDISABLED&a!"), ERROR0NO_QUICKSELL("&cSorry, this command requires the plugin QuickSell");
+    ERROR0FULL_INVENTORY(ChatColor.RED + "Your inventory is full!"), ERROR0BLACKLISTED0WORLD("&cYou are not allowed to do that in this world!"),
+    SUCCESS0TOGGLE0AUTOSELL_ON("&aAutoSell ENABLED!"), SUCCESS0TOGGLE0AUTOSELL_OFF("&aAutoSell &cDISABLED&a!"), ERROR0NO_QUICKSELL("&cSorry, this command requires the plugin QuickSell"),
+	ERROR0FULL_INVENTORY_SUB(ChatColor.YELLOW + "Go sell something!");
     String defaultMessage = "";
     String message = defaultMessage;
 
