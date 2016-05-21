@@ -21,7 +21,7 @@ public final class AutoPickupPlugin extends JavaPlugin {
     public static String dataFolder;
     public static AutoPickupPlugin plugin;
     public static boolean infinityPick = false, deleteOnFull = true, warnOnFull = false, autoBlockXp = true, autoMob = true, autoMobXP = true, extraInfo = false,
-            usingQuickSell = false, smeltFortune = false, usingCompat = false, usingAutoSell = false, usingStackableItems = false, usingPrisonGems = false;
+            usingQuickSell = false, smeltFortune = false, usingCompat = false, usingAutoSell = false, usingStackableItems = false, usingPrisonGems = false, usingTitleManager = false;
     public static SuperYaml MainConfig, MessageConfig, SmeltConfig, WorldConfig, FortuneConfig, FortuneData = null;
     public static List<String> autoSmelt = new ArrayList<>(), autoPickup = new ArrayList<>(), autoBlock = new ArrayList<>(), autoSell = new ArrayList<>();
     public static HashMap<String, Long> warnCooldown = new HashMap<>();
@@ -31,6 +31,7 @@ public final class AutoPickupPlugin extends JavaPlugin {
     public static List<String> smeltList = new ArrayList<>();
     public static Boolean allowBlockGui;
     public static Boolean autoChest;
+    public static Boolean useTitleManager;
 
 
     public static void reloadConfigs() {
@@ -55,6 +56,8 @@ public final class AutoPickupPlugin extends JavaPlugin {
         defaults.put("Block AutoXP", true);
         defaults.put("Allow BlockGui Permission", false);
         defaults.put("Auto Chest", true);
+        defaults.put("Use TitleManager", true);
+        
         for (Map.Entry<String, Object> entry : defaults.entrySet())
             if (MainConfig.get(entry.getKey()) == null) {
                 MainConfig.set(entry.getKey(), entry.getValue());
@@ -151,9 +154,10 @@ public final class AutoPickupPlugin extends JavaPlugin {
         autoMobXP = MainConfig.getBoolean("Mob.AutoXP");
         autoChest = MainConfig.getBoolean("AutoChest");
         allowBlockGui = MainConfig.getBoolean("Allow BlockGui Permission");
+        useTitleManager = MainConfig.getBoolean("Use TitleManager");
     }
 
-    
+    /* Send Title using TitleManager's API*/
     static void sendFloatingText(Player p, String title, String subtitle) {
     	new TitleObject(title, subtitle).send(p);
     }
@@ -225,6 +229,16 @@ public final class AutoPickupPlugin extends JavaPlugin {
                 message = message + pName;
             }
             Bukkit.getLogger().info(message);
+        }
+        if (getServer().getPluginManager().getPlugin("TitleManager") != null && getServer().getPluginManager().getPlugin("TitleManager").isEnabled() && useTitleManager) {
+        	getLogger().info("[AutoPickup] Using TitleManager for messages!");
+        	usingTitleManager = true;
+    	} else if (getServer().getPluginManager().getPlugin("TitleManager") != null && getServer().getPluginManager().getPlugin("TitleManager").isEnabled()) {
+    		getLogger().info("[AutoPickup] Using normal chat messages!");
+    		usingTitleManager = false;
+    	} else {
+        	getLogger().warning("[AutoPickup] TitleManager not found, using chat messages!");
+        	usingTitleManager = false;
         }
         for (Player p : Bukkit.getOnlinePlayers()) {
             if (p.hasPermission("AutoPickup.enabled")) AutoPickupPlugin.autoPickup.add(p.getName());
@@ -401,9 +415,11 @@ public final class AutoPickupPlugin extends JavaPlugin {
 
     public static void warn(Player p) {
         if (warnOnFull && p != null && p.isValid() && (!warnCooldown.containsKey(p.getName()) || warnCooldown.get(p.getName()) < Calendar.getInstance().getTimeInMillis())) {
-        	// Classic message
-            //p.sendMessage(Message.ERROR0FULL_INVENTORY + "");
-        	sendFloatingText(p, Message.ERROR0FULL_INVENTORY.toString(), Message.ERROR0FULL_INVENTORY_SUB.toString());
+        	if (usingTitleManager) {
+        		sendFloatingText(p, Message.ERROR0FULL_INVENTORY.toString(), Message.ERROR0FULL_INVENTORY_SUB.toString());
+        	} else {
+        		p.sendMessage(Message.ERROR0FULL_INVENTORY + "");
+        	}
             warnCooldown.put(p.getName(), 5000 + Calendar.getInstance().getTimeInMillis());
         }
     }

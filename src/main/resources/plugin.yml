@@ -1,5 +1,5 @@
 name: AutoPickup
-version: 3.8
+version: 3.9
 main: me.MnMaxon.AutoPickup.AutoPickupPlugin
 softdepend: [MythicDrops, MythicMobs, QuickSell, FortuneBlocks, AutoSell, StackableItems, PrisonGems, MyPet, TokenEnchant, TitleManager]
 commands:
