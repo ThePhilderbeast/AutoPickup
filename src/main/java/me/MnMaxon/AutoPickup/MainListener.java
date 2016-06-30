@@ -1,7 +1,15 @@
 package me.MnMaxon.AutoPickup;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,14 +20,13 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.*;
+import org.bukkit.event.player.PlayerFishEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 
 public class MainListener implements Listener {
 
@@ -221,6 +228,13 @@ public class MainListener implements Listener {
         }
         if (AutoPickupPlugin.getBlockedWorlds().contains(e.getPlayer().getWorld())) return;
         String name = e.getPlayer().getName();
+        
+        Location aboveBlockLoc = e.getBlock().getLocation().add(0, 1, 0);
+        Block aboveBlock = e.getPlayer().getWorld().getBlockAt(aboveBlockLoc);
+        
+        if(aboveBlock.getType() == Material.SUGAR_CANE_BLOCK ){
+            SuperLoc.add(aboveBlock.getLocation(), e.getPlayer(), AutoPickupPlugin.autoPickup.contains(name), AutoPickupPlugin.autoSmelt.contains(name), AutoPickupPlugin.autoBlock.contains(name), inhand);
+        }
         SuperLoc.add(e.getBlock().getLocation(), e.getPlayer(), AutoPickupPlugin.autoPickup.contains(name), AutoPickupPlugin.autoSmelt.contains(name), AutoPickupPlugin.autoBlock.contains(name), inhand);
         if (AutoPickupPlugin.infinityPick && e.getPlayer().hasPermission("AutoPickup.infinity") && e.getPlayer().getItemInHand() != null && e.getPlayer().getItemInHand().getType().name().contains("PICKAXE")) {
             e.getPlayer().getItemInHand().setDurability((short) 1);
