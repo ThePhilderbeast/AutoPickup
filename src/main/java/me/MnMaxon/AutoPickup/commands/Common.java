@@ -1,11 +1,9 @@
 package me.MnMaxon.AutoPickup.commands;
 
-import java.util.ArrayList;
-import java.util.Random;
-
+import me.MnMaxon.AutoPickup.AutoPickupPlugin;
+import me.MnMaxon.AutoPickup.Config;
+import me.MnMaxon.AutoPickup.Util;
 import org.bukkit.Bukkit;
-
-
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.CommandSender;
@@ -13,11 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import me.MnMaxon.AutoPickup.AutoPickupPlugin;
-
-
-import me.MnMaxon.AutoPickup.Config;
-import me.MnMaxon.AutoPickup.Util;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Common
 {
@@ -71,39 +66,49 @@ public class Common
             p.sendMessage(ChatColor.RED + "You do not have permission to open the gui");
             return;
         }
+
         int size = 18;
         Inventory newInv = Bukkit.createInventory(null, size, ChatColor.BLUE + "AutoPickup");
         // AP|AB|AS|A$|FN|  |  |AS|AB
         // TO|TO|TO|TO|TO|  |  |HE|SU
+
         ItemStack[] conts = newInv.getContents();
         conts[0] = Util.easyItem(ChatColor.GREEN + "AutoPickup", Material.HOPPER, 1, 0, ChatColor.GRAY + "Sends mined blocks", ChatColor.GRAY + "straight to your inventory");
         conts[1] = Util.easyItem(ChatColor.GREEN + "AutoBlock", Material.IRON_BLOCK, 1, 0, ChatColor.GRAY + "Turns ingots into blocks");
         conts[2] = Util.easyItem(ChatColor.GREEN + "AutoSmelt", Material.FURNACE, 1, 0, ChatColor.GRAY + "Smelts all mined ores");
-        conts[3] = Util.easyItem(ChatColor.GREEN + "Fullnotify", Material.CHEST, 1, 0, ChatColor.GRAY + "Notifys you when your inventory is full");
-        if (Config.usingQuickSell)
+
+        if (Config.usingQuickSell) {
+            conts[3] = Util.easyItem(ChatColor.GREEN + "AutoSell", Material.GOLD_INGOT, 1, 0, ChatColor.GRAY + "Sells any possible", ChatColor.GRAY + "mined blocks");
+            conts[4] = Util.easyItem(ChatColor.GREEN + "FullNotify", Material.NOTE_BLOCK, 1, 0, ChatColor.GRAY + "Notifies you on full inventory");
+        } else
         {
-            conts[4] = Util.easyItem(ChatColor.GREEN + "AutoSell", Material.GOLD_INGOT, 1, 0, ChatColor.GRAY + "Sells any possible", ChatColor.GRAY + "mined blocks");
+            conts[3] = Util.easyItem(ChatColor.GREEN + "FullNotify", Material.NOTE_BLOCK, 1, 0, ChatColor.GRAY + "Notifies you on full inventory");
         }
 
-        String autoPickupName = (AutoPickupPlugin.autoPickup.contains(p.getName()))?ChatColor.GREEN + "AutoPickup ENABLED":ChatColor.RED + "AutoPickup DISABLED";
-        String autoBlockName = (AutoPickupPlugin.autoBlock.contains(p.getName()))?ChatColor.GREEN + "AutoBlock ENABLED":ChatColor.RED + "AutoBlock DISABLED";
-        String autoSmeltName = (AutoPickupPlugin.autoSmelt.contains(p.getName()))?ChatColor.GREEN + "AutoSmelt ENABLED":ChatColor.RED + "AutoSmelt DISABLED";
-        String autoSellName = (AutoPickupPlugin.autoSell.contains(p.getName()))?ChatColor.GREEN + "AutoSell ENABLED":ChatColor.RED + "AutoSell DISABLED";
+        String autoPickupName = (AutoPickupPlugin.autoPickup.contains(p.getName())) ? ChatColor.GREEN + "AutoPickup ENABLED" : ChatColor.RED + "AutoPickup DISABLED";
+        String autoBlockName = (AutoPickupPlugin.autoBlock.contains(p.getName())) ? ChatColor.GREEN + "AutoBlock ENABLED" : ChatColor.RED + "AutoBlock DISABLED";
+        String autoSmeltName = (AutoPickupPlugin.autoSmelt.contains(p.getName())) ? ChatColor.GREEN + "AutoSmelt ENABLED" : ChatColor.RED + "AutoSmelt DISABLED";
+        String autoSellName = (AutoPickupPlugin.autoSell.contains(p.getName())) ? ChatColor.GREEN + "AutoSell ENABLED" : ChatColor.RED + "AutoSell DISABLED";
+        String fullNotifyName = (AutoPickupPlugin.fullNotify.contains(p.getName())) ? ChatColor.GREEN + "FullNotify ENABLED" : ChatColor.RED + "FullNotify DISABLED";
 
         //TODO: make these real if statements
-        int apDur = (AutoPickupPlugin.autoPickup.contains(p.getName()))?10:8;
-        int abDur = (AutoPickupPlugin.autoBlock.contains(p.getName()))?10:8;
-        int asDur = (AutoPickupPlugin.autoSmelt.contains(p.getName()))?10:8;
-        int aSellDur = (AutoPickupPlugin.autoSell.contains(p.getName()))?10:8;
+        int apDur = (AutoPickupPlugin.autoPickup.contains(p.getName())) ? 10: 8;
+        int abDur = (AutoPickupPlugin.autoBlock.contains(p.getName())) ? 10 : 8;
+        int asDur = (AutoPickupPlugin.autoSmelt.contains(p.getName())) ? 10 : 8;
+        int aSellDur = (AutoPickupPlugin.autoSell.contains(p.getName())) ? 10 : 8;
+        int fullNotifyDur = (AutoPickupPlugin.fullNotify.contains(p.getName())) ? 10 : 8;
 
         //TODO: make these real if statements
-        conts[9] = (p.hasPermission("AutoPickup.Toggle"))?Util.easyItem(autoPickupName, Material.INK_SACK, 1, apDur, ChatColor.GRAY + "Click to Toggle"):Util.easyItem(autoPickupName, Material.INK_SACK, 1, apDur);
-        conts[10] = (p.hasPermission("AutoBlock.Toggle"))?Util.easyItem(autoBlockName, Material.INK_SACK, 1, abDur, ChatColor.GRAY + "Click to Toggle"):Util.easyItem(autoBlockName, Material.INK_SACK, 1, abDur);
-        conts[11] = (p.hasPermission("AutoSmelt.Toggle"))?Util.easyItem(autoSmeltName, Material.INK_SACK, 1, asDur, ChatColor.GRAY + "Click to Toggle"):Util.easyItem(autoSmeltName, Material.INK_SACK, 1, asDur);
-        conts[12] = (p.hasPermission("Fullnotify.Toggle"))?Util.easyItem(autoSmeltName, Material.INK_SACK, 1, asDur, ChatColor.GRAY + "Click to Toggle"):Util.easyItem(autoSmeltName, Material.INK_SACK, 1, asDur);
-        if (Config.usingQuickSell)
+        conts[9] = (p.hasPermission("AutoPickup.Toggle")) ? Util.easyItem(autoPickupName, Material.INK_SACK, 1, apDur, ChatColor.GRAY + "Click to Toggle") : Util.easyItem(autoPickupName, Material.INK_SACK, 1, apDur);
+        conts[10] = (p.hasPermission("AutoBlock.Toggle")) ? Util.easyItem(autoBlockName, Material.INK_SACK, 1, abDur, ChatColor.GRAY + "Click to Toggle") : Util.easyItem(autoBlockName, Material.INK_SACK, 1, abDur);
+        conts[11] = (p.hasPermission("AutoSmelt.Toggle")) ? Util.easyItem(autoSmeltName, Material.INK_SACK, 1, asDur, ChatColor.GRAY + "Click to Toggle") : Util.easyItem(autoSmeltName, Material.INK_SACK, 1, asDur);
+
+        if (Config.usingQuickSell) {
+            conts[12] = (p.hasPermission("AutoSell.Toggle")) ? Util.easyItem(autoSellName, Material.INK_SACK, 1, aSellDur, ChatColor.GRAY + "Click to Toggle") : Util.easyItem(autoSellName, Material.INK_SACK, 1, aSellDur);
+            conts[13] = (p.hasPermission("FullNotify.Toggle")) ? Util.easyItem(fullNotifyName, Material.INK_SACK, 1, fullNotifyDur, ChatColor.GRAY + "Click to Toggle") : Util.easyItem(fullNotifyName, Material.INK_SACK, 1, fullNotifyDur);
+        } else
         {
-            conts[13] = (p.hasPermission("AutoSell.Toggle"))?Util.easyItem(autoSellName, Material.INK_SACK, 1, aSellDur, ChatColor.GRAY + "Click to Toggle"):Util.easyItem(autoSellName, Material.INK_SACK, 1, aSellDur);
+            conts[12] = (p.hasPermission("FullNotify.Toggle")) ? Util.easyItem(fullNotifyName, Material.INK_SACK, 1, fullNotifyDur, ChatColor.GRAY + "Click to Toggle") : Util.easyItem(fullNotifyName, Material.INK_SACK, 1, fullNotifyDur);
         }
 
         ItemStack locked = Util.easyItem(ChatColor.RED + "LOCKED", Material.STAINED_GLASS_PANE, 1, 14);
@@ -117,7 +122,7 @@ public class Common
             conts[16] =Util.easyItem(ChatColor.RED + "Suggestions/Found Bugs", Material.LAVA_BUCKET, 1, 0, ChatColor.GRAY + "Contact " + ChatColor.GOLD + "MnMaxon" + ChatColor.GRAY + " on ", ChatColor.GRAY + "Spigot or Bukkit", ChatColor.GRAY + "Or, by email:", ChatColor.GRAY + "masontg777@aol.com");
         }
 
-        conts[17] =Util.easyItem(ChatColor.RED + "Close", Material.ARROW, 1, 0);
+        conts[17] = Util.easyItem(ChatColor.RED + "Close", Material.ARROW, 1, 0);
 
         for (int i = 0; i < conts.length; i++)
         {

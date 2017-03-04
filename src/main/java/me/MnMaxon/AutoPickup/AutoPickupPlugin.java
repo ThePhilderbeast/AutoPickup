@@ -1,18 +1,12 @@
 package me.MnMaxon.AutoPickup;
 
-import me.MnMaxon.AutoPickup.commands.AutoBlockCommand;
-import me.MnMaxon.AutoPickup.commands.AutoPickup;
-import me.MnMaxon.AutoPickup.commands.AutoSell;
-import me.MnMaxon.AutoPickup.commands.AutoSmeltCommand;
-import me.MnMaxon.AutoPickup.commands.FullNotify;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
+import me.MnMaxon.AutoPickup.commands.*;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class AutoPickupPlugin extends JavaPlugin
 {
@@ -23,7 +17,6 @@ public final class AutoPickupPlugin extends JavaPlugin
     public static List < String > autoBlock = new ArrayList<>();
     public static List < String > autoSell = new ArrayList<>();
     public static List < String > fullNotify = new ArrayList<>();
-    public static HashMap < String, Long > warnCooldown = new HashMap<>();
 
     @Override
     public void onDisable()
@@ -123,10 +116,13 @@ public final class AutoPickupPlugin extends JavaPlugin
             {
                 AutoPickupPlugin.autoSmelt.add(p.getName());
             }
-
             if (p.hasPermission("AutoSell.enabled") && Config.usingQuickSell)
             {
                 AutoPickupPlugin.autoSell.add(p.getName());
+            }
+            if (p.hasPermission("FullNotify.enabled"))
+            {
+                AutoPickupPlugin.fullNotify.add(p.getName());
             }
         }
     }

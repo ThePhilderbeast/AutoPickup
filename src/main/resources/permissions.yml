@@ -17,3 +17,4 @@ AutoSell.toggle
 
 FullNotify.enabled
 FullNotify.toggle
+FullNotify.command
