@@ -21,4 +21,4 @@ commands:
   FullNotify:
     aliases: [fn]
     description: Enables inventory full notifications
-    usage: /fullnotify help
+    usage: /fullnotify

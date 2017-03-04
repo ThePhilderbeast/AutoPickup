@@ -1,5 +1,6 @@
 package me.MnMaxon.AutoPickup;
 
+import me.MnMaxon.AutoPickup.commands.Common;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Item;
@@ -12,16 +13,9 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.ItemSpawnEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerToggleSneakEvent;
-import org.bukkit.event.player.PlayerFishEvent;
-
+import org.bukkit.event.player.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import me.MnMaxon.AutoPickup.commands.Common;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -80,12 +74,14 @@ public class MainListener implements Listener
         try
         {
             e.getCurrentItem().getData().getItemType();
-            if (e.getInventory().getName().equals(ChatColor.BLUE + "Auto Pickup"))
+
+            if (e.getInventory().getName().equals(ChatColor.BLUE + "AutoPickup"))
             {
                 e.setCancelled(true);
                 Player p = (Player)e.getWhoClicked();
                 String name = ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName().toLowerCase());
-                if (name.contains("auto pickup"))
+
+                if (name.contains("autopickup"))
                 {
                     if (p.hasPermission("AutoPickup.Toggle"))
                     {
@@ -98,7 +94,7 @@ public class MainListener implements Listener
                         }
                         Common.openGui(p);
                     }
-                } else if (name.contains("auto smelt"))
+                } else if (name.contains("autosmelt"))
                 {
                     if (p.hasPermission("AutoSmelt.Toggle"))
                     {
@@ -111,7 +107,7 @@ public class MainListener implements Listener
                         }
                         Common.openGui(p);
                     }
-                } else if (name.contains("auto block"))
+                } else if (name.contains("autoblock"))
                 {
                     if (p.hasPermission("AutoBlock.Toggle"))
                     {
@@ -124,7 +120,7 @@ public class MainListener implements Listener
                         }
                         Common.openGui(p);
                     }
-                } else if (name.contains("auto sell"))
+                } else if (name.contains("autosell"))
                 {
                     if (p.hasPermission("AutoSell.Toggle"))
                     {
@@ -137,7 +133,7 @@ public class MainListener implements Listener
                         }
                         Common.openGui(p);
                     }
-                } else if (name.contains("full notify"))
+                } else if (name.contains("fullnotify"))
                 {
                     if (p.hasPermission("FullNotify.Toggle"))
                     {
@@ -150,7 +146,7 @@ public class MainListener implements Listener
                         }
                         Common.openGui(p);
                     }
-                } else if ( ! name.contains("auto"))
+                } else if (!name.contains("auto"))
                 {
                     if (name.contains("close"))
                     {
@@ -278,7 +274,7 @@ public class MainListener implements Listener
                     {
                         name = "null";
                     }
-                    ArrayList < String > lore = new ArrayList <> ();
+                    ArrayList< String > lore = new ArrayList <> ();
                     List < String > oldLore = im.getLore();
                     if (oldLore != null && oldLore.size() != 0 && oldLore.get(0).equals(ChatColor.MAGIC + "DATA"))
                     {
@@ -295,6 +291,7 @@ public class MainListener implements Listener
                     im.setDisplayName(ChatColor.GOLD + "" + ChatColor.BOLD + "Shift Right Click to Sell Your Items");
                     is.setItemMeta(im);
                     e.getPlayer().updateInventory();
+
                 } catch (NullPointerException ignored)
                 {
                 }
@@ -330,7 +327,7 @@ public class MainListener implements Listener
             ArrayList < ItemStack > newDrops = new ArrayList <> ();
             for (ItemStack drop:e.getDrops())
             {
-                HashMap < Integer, ItemStack > remaining = killer.getInventory().addItem(drop);
+                HashMap< Integer, ItemStack > remaining = killer.getInventory().addItem(drop);
                 for (ItemStack remainder:remaining.values())
                 {
                     newDrops.add(remainder);
@@ -367,7 +364,7 @@ public class MainListener implements Listener
             && e.getCaught() instanceof Item)
         {
             Item item = (Item)e.getCaught();
-            Collection < ItemStack > newDrops = e.getPlayer().getInventory().addItem(item.getItemStack()).values();
+            Collection< ItemStack > newDrops = e.getPlayer().getInventory().addItem(item.getItemStack()).values();
 
             if ( ! newDrops.isEmpty())
             {

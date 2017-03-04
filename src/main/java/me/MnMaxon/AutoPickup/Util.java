@@ -1,31 +1,29 @@
 package me.MnMaxon.AutoPickup;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.HashMap;
-
+import haveric.stackableItems.util.InventoryUtil;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
-
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import haveric.stackableItems.util.InventoryUtil;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+
+import static me.MnMaxon.AutoPickup.AutoPickupPlugin.fullNotify;
 
 public class Util
 {
 
     public static void warn(Player p)
     {
-        if (Config.warnOnFull
-            && p != null
-            && p.isValid()
-            && ( ! AutoPickupPlugin.warnCooldown.containsKey(p.getName()) || AutoPickupPlugin.warnCooldown.get(p.getName()) < Calendar.getInstance().getTimeInMillis()))
-        {
-            p.sendMessage(Message.ERROR0FULL_INVENTORY + "");
-            AutoPickupPlugin.warnCooldown.put(p.getName(), 5000 + Calendar.getInstance().getTimeInMillis());
+        if (p != null && p.isValid() && fullNotify.contains(p.getName())) {
+            p.playSound(p.getLocation(), Sound.BLOCK_NOTE_PLING, SoundCategory.BLOCKS, 1.0f, 1.0f);
+            p.sendTitle(Message.ERROR0FULL_INVENTORY.toString(), ChatColor.GOLD + "/fullnotify to disable", 1, 15, 5);
         }
     }
 
@@ -36,10 +34,18 @@ public class Util
             return new HashMap <> ();
         }
 
-        if ( ! Config.usingStackableItems || p == null)
+        if (!Config.usingStackableItems || p == null)
         {
+            HashMap<Integer, ItemStack> remaining = inv.addItem(is);
+
+            if (p != null && remaining.size() > 0 && fullNotify.contains(p.getName()))
+            {
+                warn(p);
+            }
+
             return inv.addItem(is);
         }
+
         ItemStack toSend = is.clone();
         ItemStack remaining = null;
         int freeSpaces = InventoryUtil.getPlayerFreeSpaces(p, toSend);
