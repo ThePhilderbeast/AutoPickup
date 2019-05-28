@@ -81,7 +81,7 @@ dependencies
 
     compileOnly group:'org.spigotmc',
             name:'spigot-api',
-            version: "1.13.2-R0.1-SNAPSHOT"
+            version: "1.14.2-R0.1-SNAPSHOT"
             // project.property("apiversion")
 
     //testing dependencys

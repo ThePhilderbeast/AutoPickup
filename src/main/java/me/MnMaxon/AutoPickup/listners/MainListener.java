@@ -87,7 +87,7 @@ public class MainListener implements Listener
         try
         {
             e.getCurrentItem().getData().getItemType();
-            if (e.getInventory().getName().equals(ChatColor.BLUE + "AutoPickup Settings"))
+            if (e.getView().getTitle().equals(ChatColor.BLUE + "AutoPickup Settings"))
             {
                 e.setCancelled(true);
                 Player p = (Player)e.getWhoClicked();
