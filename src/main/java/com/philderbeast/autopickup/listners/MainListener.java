@@ -61,7 +61,7 @@ public class MainListener implements Listener
     {
         if (Config.autoBlockXp &&  ! Config.getBlockedWorlds().contains(e.getBlock().getWorld()))
         {
-            int exp = e.getExpToDrop()
+            int exp = e.getExpToDrop();
 
             Player p = e.getPlayer();
 
@@ -69,7 +69,7 @@ public class MainListener implements Listener
             final ItemStack armor[] = p.getInventory().getArmorContents();
             for (ItemStack i : armor)
             {
-                applyMending(i, exp)
+                applyMending(i, exp);
             }
             e.getPlayer().giveExp(exp);
             e.setExpToDrop(0);
