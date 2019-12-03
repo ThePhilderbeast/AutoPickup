@@ -296,7 +296,7 @@ public class Config
 		//blacklist coal from being smelted by default
         if (smeltConfig.get("Blacklist") == null)
         {
-            smeltConfig.set("Blacklist", Arrays.asList("1", "Coal:1"));
+            smeltConfig.set("Blacklist", Arrays.asList("Coal:1"));
         }
 
 		//disable world blacklist

@@ -23,6 +23,8 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerToggleSneakEvent;
 import org.bukkit.event.player.PlayerFishEvent;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.meta.Damageable;
 
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -59,9 +61,34 @@ public class MainListener implements Listener
     {
         if (Config.autoBlockXp &&  ! Config.getBlockedWorlds().contains(e.getBlock().getWorld()))
         {
-            e.getPlayer().giveExp(e.getExpToDrop());
+            int exp = e.getExpToDrop()
+
+            Player p = e.getPlayer();
+
+            //do mending
+            final ItemStack armor[] = p.getInventory().getArmorContents();
+            for (ItemStack i : armor)
+            {
+                applyMending(i, exp)
+            }
+            e.getPlayer().giveExp(exp);
             e.setExpToDrop(0);
         }
+    }
+
+    private int applyMending(ItemStack i, int exp)
+    {
+        if (i.getEnchantments().containsKey(Enchantment.MENDING))
+        {
+            ItemMeta im = i.getItemMeta();
+            if (im instanceof Damageable) {
+                Damageable d = (Damageable)im;
+                int min = Math.min(exp, d.getDamage());
+                d.setDamage(d.getDamage() - min);
+                exp -= min;
+            }
+        }
+        return exp;
     }
 
     @EventHandler(priority = EventPriority.MONITOR)

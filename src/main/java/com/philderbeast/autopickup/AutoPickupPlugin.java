@@ -51,10 +51,10 @@ public final class AutoPickupPlugin extends JavaPlugin
 
         getServer().getPluginManager().registerEvents(new MainListener(), this);
 
-        this.getCommand("AutoPickup").setExecutor(new AutoPickup());
-        this.getCommand("AutoSmelt").setExecutor(new AutoSmeltCommand());
-        this.getCommand("AutoBlock").setExecutor(new AutoBlockCommand());
-        this.getCommand("FullNotify").setExecutor(new FullNotify());
+        getCommand("AutoPickup").setExecutor(new AutoPickup());
+        getCommand("AutoSmelt").setExecutor(new AutoSmeltCommand());
+        getCommand("AutoBlock").setExecutor(new AutoBlockCommand());
+        getCommand("FullNotify").setExecutor(new FullNotify());
 
         for (Player p:Bukkit.getOnlinePlayers())
         {
