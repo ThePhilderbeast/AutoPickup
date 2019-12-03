@@ -5,6 +5,7 @@ import com.philderbeast.autopickup.commands.AutoPickup;
 import com.philderbeast.autopickup.commands.AutoSmeltCommand;
 import com.philderbeast.autopickup.commands.FullNotify;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +13,9 @@ import java.util.List;
 import com.philderbeast.autopickup.listners.MainListener;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.java.JavaPluginLoader;
 
 public final class AutoPickupPlugin extends JavaPlugin
 {
@@ -47,8 +50,6 @@ public final class AutoPickupPlugin extends JavaPlugin
         Config.reloadConfigs();
 
         getServer().getPluginManager().registerEvents(new MainListener(), this);
-
-        ArrayList < String > plugins = new ArrayList <> ();
 
         this.getCommand("AutoPickup").setExecutor(new AutoPickup());
         this.getCommand("AutoSmelt").setExecutor(new AutoSmeltCommand());

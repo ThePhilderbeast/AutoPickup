@@ -79,9 +79,9 @@ dependencies
     compileOnly'org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT'
 
     testCompile 'junit:junit:4.12'
-    testCompile 'com.github.seeseemelk:MockBukkit-v1.13:0.1.1-SNAPSHOT'
+    testCompile 'com.github.seeseemelk:MockBukkit-v1.14:0.2.1'
 }
-}
+
 
 task deploy(type: Copy, dependsOn: ['build']) {
     from "${buildDir}/libs"
