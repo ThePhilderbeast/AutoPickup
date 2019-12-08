@@ -66,6 +66,9 @@ public class MainListener implements Listener
             Player p = e.getPlayer();
 
             //do mending
+            applyMending(p.getInventory().getItemInMainHand(), exp);
+            applyMending(p.getInventory().getItemInOffHand(), exp);
+
             final ItemStack armor[] = p.getInventory().getArmorContents();
             for (ItemStack i : armor)
             {
