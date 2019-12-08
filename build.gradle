@@ -13,8 +13,8 @@ plugins {
     id "de.undercouch.download" version "4.0.2"
 }
 
-apply plugin:'java'
-apply plugin:"jacoco"
+apply plugin: 'java'
+apply plugin: 'jacoco'
 apply plugin: 'maven-publish'
 
 group = project.property("group")
@@ -61,6 +61,11 @@ repositories
     }
 }
 
+jacoco {
+    toolVersion = "0.8.5"
+    reportsDir = file("$buildDir/jacoco")
+}
+
 jacocoTestReport
 {
     reports
@@ -69,8 +74,6 @@ jacocoTestReport
         html.enabled = true
     }
 }
-
-check.dependsOn jacocoTestReport
 
 build.dependsOn jar
 

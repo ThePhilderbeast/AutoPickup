@@ -424,7 +424,7 @@ public class MainListener implements Listener
         {
             return;
         }
-        String name = e.getPlayer().getName();
+        // String name = e.getPlayer().getName();
 
         LocationActions.add(e.getBlock().getLocation(), e.getPlayer(), inhand);
 

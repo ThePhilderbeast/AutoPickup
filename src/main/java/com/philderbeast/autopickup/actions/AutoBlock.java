@@ -35,7 +35,6 @@ public class AutoBlock
             return remaining;
         }
 
-        //TODO: WTF does this do?
         //if there is only 1 item of the stack left return it?
         if (remaining.size() == 1 && remaining.values().toArray()[0].equals(is))
         {
@@ -83,7 +82,6 @@ public class AutoBlock
     private static ItemStack[] block(Player p, ItemStack[] conts)
     {
 
-        //TODO: work out what these are for
         boolean totalChanged = false;
 
         for (ItemStack is:conts)

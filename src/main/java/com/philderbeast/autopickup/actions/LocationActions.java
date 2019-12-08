@@ -37,7 +37,6 @@ public class LocationActions
         final LocationActions sl = new LocationActions(p, is);
         locations.put(location, sl);
 
-        //TODO: whats this achieve?
         Bukkit.getScheduler().scheduleSyncDelayedTask(Bukkit.getPluginManager().getPlugin("AutoPickup"), () -> {
             if (locations.containsKey(location) && locations.get(location).equals(sl))
             {

@@ -90,7 +90,7 @@ public class Config
             fortuneConfig.load(configFolder + "/Advanced Fortune.yml");
         } catch (InvalidConfigurationException | IOException ignored)
         {
-            Bukkit.getLogger().severe("Failed to load all configs");
+            Bukkit.getLogger().severe("Failed to load all configs, using defaults");
         }
 
         if (fortuneData != null)

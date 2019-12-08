@@ -4,22 +4,22 @@ api-version: 1.13
 main: com.philderbeast.autopickup.AutoPickupPlugin
 softdepend: [MythicDrops, MythicMobs, QuickSell, FortuneBlocks, AutoSell, StackableItems, PrisonGems, MyPet, TokenEnchant]
 commands:
-  AutoPickup:
+  autopickup:
     aliases: [ap]
     description: Displays AutoPickup Help
     usage: /ap help
-  AutoSmelt:
+  autosmelt:
     aliases: [as]
     description: Displays AutoPickup Help
     usage: /as help
-  AutoBlock:
+  autoblock:
     aliases: [ab]
     description: Displays AutoPickup Help
     usage: /ab help
-  AutoSell:
+  autosell:
     description: Enables autoselling with QuickSell
     usage: /autosell help
-  FullNotify:
+  fullnotify:
     aliases: [fn]
     description: Enables inventory full notifications
     usage: /fullnotify help
