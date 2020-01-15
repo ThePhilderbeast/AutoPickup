@@ -83,7 +83,7 @@ dependencies
 {
     implementation 'org.spigotmc:spigot-api:1.14.4-R0.1-SNAPSHOT'
 
-    testImplementation  'junit:junit:4.12'
+    testImplementation  'junit:junit:4.13'
     // testImplementation 'com.github.seeseemelk:MockBukkit-v1.14:0.2.1'
     testImplementation  files('libs/MockBukkit-v1.14-0.2.2-SNAPSHOT.jar')
     // https://mvnrepository.com/artifact/commons-io/commons-io
