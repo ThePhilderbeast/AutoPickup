@@ -88,7 +88,7 @@ sonarqube {
 
 dependencies
 {
-    implementation 'org.spigotmc:spigot-api:1.15.1-R0.1-SNAPSHOT'
+    implementation 'org.spigotmc:spigot-api:1.15.2-R0.1-SNAPSHOT'
 
     testImplementation  'junit:junit:4.13'
     // testImplementation 'com.github.seeseemelk:MockBukkit-v1.14:0.2.1'
