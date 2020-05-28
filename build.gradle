@@ -94,6 +94,6 @@ dependencies
     // testImplementation 'com.github.seeseemelk:MockBukkit-v1.14:0.2.1'
     testImplementation  files('libs/MockBukkit-v1.14-0.2.2-SNAPSHOT.jar')
     // https://mvnrepository.com/artifact/commons-io/commons-io
-    testImplementation 'commons-io:commons-io:2.6'
+    testImplementation 'commons-io:commons-io:2.7'
 
 }
