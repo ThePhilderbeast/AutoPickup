@@ -29,6 +29,7 @@ public class Config
 	public static boolean autoBlockXp = true;
 	public static boolean autoMob = true;
 	public static boolean autoMobXP = true;
+	public static boolean autoFish = true;
 	public static boolean extraInfo = false;
     public static boolean usingQuickSell = false;
 	public static boolean smeltFortune = false;
@@ -229,6 +230,7 @@ public class Config
         autoMob = mainConfig.getBoolean("Mob.AutoPickup");
         autoBlockXp = mainConfig.getBoolean("Block AutoXP");
         autoMobXP = mainConfig.getBoolean("Mob.AutoXP");
+        autoFish = mainConfig.getBoolean("Mob.AutoFish");
         autoChest = mainConfig.getBoolean("AutoChest");
         allowBlockGui = mainConfig.getBoolean("Allow BlockGui Permission");
 
@@ -246,6 +248,7 @@ public class Config
         defaults.put("AutoSmelt Compat Mode", true);
         defaults.put("AutoBlock Quartz", true);
         defaults.put("Mob.AutoPickup", true);
+        defaults.put("Mob.AutoFish", true);
         defaults.put("Mob.AutoXP", true);
         defaults.put("Block AutoXP", true);
         defaults.put("Allow BlockGui Permission", false);

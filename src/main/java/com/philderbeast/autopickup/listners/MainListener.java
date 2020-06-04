@@ -354,7 +354,7 @@ public class MainListener implements Listener
     public void onFish(PlayerFishEvent e)
     {
         if ( ! Config.getBlockedWorlds().contains(e.getPlayer().getWorld())
-            && Config.autoMob
+            && Config.autoFish
             && e.getCaught() != null
             && e.getCaught() instanceof Item)
         {
