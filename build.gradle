@@ -92,7 +92,7 @@ dependencies
     testImplementation  'junit:junit:4.13'
     testImplementation 'com.github.seeseemelk:MockBukkit-v1.16:0.5.0'
     // https://mvnrepository.com/artifact/commons-io/commons-io
-    testImplementation 'commons-io:commons-io:2.7'
+    testImplementation 'commons-io:commons-io:2.8.0'
 
 }
 
