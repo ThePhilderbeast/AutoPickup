@@ -46,11 +46,18 @@ public class Config
 	private static YamlConfiguration worldConfig = null;
 	private static YamlConfiguration fortuneConfig = null;
 
-
 	public static List < String > smeltList = new ArrayList<>();
+
 	public static final List < Material > fortuneList = new ArrayList <> ();
 	public static final HashMap < Material, Short > smeltBlacklist = new HashMap <> ();
     private static final List < String > blockedWorlds = new ArrayList <> ();
+
+    private static final String mainConfigFileName    = "/Config.yml";
+    private static final String messageConfigFileName = "/Messages.yml";
+    private static final String smeltConfigFileName   = "/Smelt Blacklist.yml";
+    private static final String worldConfigFileName   = "/World Blacklist.yml";
+    private static final String fortuneConfigFileName = "/Advanced Fortune.yml";
+
 
     public static void setConfigFolder(String configFolder)
     {
@@ -61,11 +68,11 @@ public class Config
     {
 		try
         {
-            mainConfig.save(configFolder + "/Config.yml");
-            messageConfig.save(configFolder + "/Messages.yml");
-            smeltConfig.save(configFolder + "/Smelt Blacklist.yml");
-            worldConfig.save(configFolder + "/World Blacklist.yml");
-            fortuneConfig.save(configFolder + "/Advanced Fortune.yml");
+            mainConfig.save(    configFolder    + mainConfigFileName);
+            messageConfig.save( configFolder + messageConfigFileName);
+            smeltConfig.save(   configFolder   + smeltConfigFileName);
+            worldConfig.save(   configFolder   + worldConfigFileName);
+            fortuneConfig.save( configFolder + fortuneConfigFileName);
 		}catch (IOException e)
         {
 			e.printStackTrace();
@@ -83,11 +90,11 @@ public class Config
         defaultConfigs();
 
         try{
-            mainConfig.load(configFolder + "/Config.yml");
-            messageConfig.load(configFolder + "/Messages.yml");
-            smeltConfig.load(configFolder + "/Smelt Blacklist.yml");
-            worldConfig.load(configFolder + "/World Blacklist.yml");
-            fortuneConfig.load(configFolder + "/Advanced Fortune.yml");
+            mainConfig.load(configFolder    + mainConfigFileName);
+            messageConfig.load(configFolder + messageConfigFileName);
+            smeltConfig.load(configFolder   + smeltConfigFileName);
+            worldConfig.load(configFolder   + worldConfigFileName);
+            fortuneConfig.load(configFolder + fortuneConfigFileName);
         } catch (InvalidConfigurationException | IOException ignored)
         {
             Bukkit.getLogger().severe("Failed to load all configs, using defaults");
@@ -96,7 +103,7 @@ public class Config
         if (fortuneData != null)
 		{
             try {
-			    fortuneData.save(configFolder + "/Fortune Data");
+			    fortuneData.save(configFolder + fortuneConfig);
             } catch (IOException ignored)
             {
             }
@@ -156,7 +163,7 @@ public class Config
             fortuneData = new YamlConfiguration();
             try
             {
-                fortuneData.load(configFolder + "/Fortune Data");
+                fortuneData.load(configFolder + fortuneConfig);
             } catch (InvalidConfigurationException | IOException ignored)
             {
             }
