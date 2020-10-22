@@ -37,7 +37,7 @@ public class CommandsTest {
     @After
     public void tearDown()
     {
-        MockBukkit.unload();
+        MockBukkit.unmock();
     }
 
     @Test

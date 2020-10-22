@@ -3,7 +3,6 @@ package com.philderbeast.autopickup.API;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Assert;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.MockBukkit;
@@ -33,7 +32,7 @@ public class AutoPickupMethodsTest {
     @After
     public void tearDown()
     {
-        MockBukkit.unload();
+        MockBukkit.unmock();
         
     }
 

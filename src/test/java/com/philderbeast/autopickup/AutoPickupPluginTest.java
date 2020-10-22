@@ -7,7 +7,6 @@ import org.junit.Assert;
 
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.permissions.PermissionAttachment;
-import org.bukkit.plugin.Plugin;
 
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.MockBukkit;
@@ -32,7 +31,7 @@ public class AutoPickupPluginTest {
     @After
     public void tearDown()
     {
-        MockBukkit.unload();
+        MockBukkit.unmock();
         
     }
 

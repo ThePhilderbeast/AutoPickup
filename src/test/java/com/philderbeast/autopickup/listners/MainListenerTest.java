@@ -15,8 +15,6 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMockFactory;
 
-import static org.junit.Assert.assertTrue;
-
 import com.philderbeast.autopickup.AutoPickupPlugin;
 
 public class MainListenerTest {
@@ -40,7 +38,7 @@ public class MainListenerTest {
     @After
     public void tearDown()
     {
-        MockBukkit.unload();
+        MockBukkit.unmock();
         
     }
 
