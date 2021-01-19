@@ -200,6 +200,9 @@ public class AutoBlock
         convertTo.put(Material.IRON_INGOT, Material.IRON_BLOCK);
         convertNum.put(Material.IRON_INGOT, 9);
 
+        convertTo.put(Material.IRON_NUGGET, Material.IRON_INGOT);
+        convertNum.put(Material.IRON_NUGGET, 9);
+
         convertTo.put(Material.REDSTONE, Material.REDSTONE_BLOCK);
         convertNum.put(Material.REDSTONE, 9);
 
@@ -218,5 +221,8 @@ public class AutoBlock
 
         convertTo.put(Material.GOLD_INGOT, Material.GOLD_BLOCK);
         convertNum.put(Material.GOLD_INGOT, 9);
+
+        convertTo.put(Material.GOLD_NUGGET, Material.GOLD_INGOT);
+        convertNum.put(Material.GOLD_NUGGET, 9);
     }
 }
