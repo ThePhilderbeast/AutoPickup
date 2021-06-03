@@ -355,6 +355,11 @@ public class MainListener implements Listener
             && e.getCaught() instanceof Item)
         {
             Item item = (Item)e.getCaught();
+            // Doesn't handle drops for fish that have item meta (i.e. morefish/evenmorefish fish)
+            if ( ! item.getItemStack().hasItemMeta())
+            {
+                return;
+            }
             Collection < ItemStack > newDrops = e.getPlayer().getInventory().addItem(item.getItemStack()).values();
 
             if ( ! newDrops.isEmpty())
